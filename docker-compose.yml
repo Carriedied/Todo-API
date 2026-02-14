@@ -1,0 +1,17 @@
+﻿services:
+  todoapi:
+    build:
+      context: .
+      dockerfile: ToDo.API/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=TodoInMemoryDb
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - todonetwork
+
+networks:
+  todonetwork:
+    driver: bridge
