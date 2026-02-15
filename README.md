@@ -24,7 +24,7 @@ Swagger будет доступен по адресу:
 
 ```aiignore
 
-http://localhost:8080/swagger
+http://localhost:8080/Swagger
 
 ```
 
