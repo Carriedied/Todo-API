@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 using ToDo.Application.Behaviors;
+using ToDo.Application.Commands;
 using ToDo.Infrastructure.Extensions;
 
 namespace ToDo.API;
@@ -35,8 +36,11 @@ public class Program
             }
         });
 
-        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
-        builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        builder.Services.AddMediatR(cfg => 
+        {
+            cfg.RegisterServicesFromAssemblyContaining<Program>(); // Главный проект
+            cfg.RegisterServicesFromAssemblyContaining<CreateTodoCommandHandler>(); // Application проект
+        });
 
         builder.Services.AddFluentValidationAutoValidation()
             .AddFluentValidationClientsideAdapters()
